@@ -16,6 +16,7 @@ interface LikesProps {
 
 function Likes({ likes }: LikesProps) {
   const [open, setOpen] = useState(false);
+  // console.log(likes);
 
   return (
     <div>
@@ -42,7 +43,7 @@ function Likes({ likes }: LikesProps) {
               >
                 <UserCircle className="h-8 w-8 text-muted-foreground" />
                 <div>
-                  <p className="font-medium">{like.user_id}</p>
+                  <p className="font-medium">{like.user_id.name}</p>
                 </div>
               </div>
             ))

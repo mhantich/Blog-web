@@ -58,12 +58,14 @@ async function likePost(formData: FormData) {
 export default async function BlogPostInteractions({ post }: any) {
   const commentsResponse = await fetch(`${process.env.REACT_API_URL}/api/comments/${post._id}/comments`);
   const { comments } = await commentsResponse.json();
+  console.log(comments)
 
   const likesResponse = await fetch(`${process.env.REACT_API_URL}/api/posts/${post._id}/likes`);
   const { likes } = await likesResponse.json();
 
 
-  const isLiked = likes.some((likes:any) => likes.user_id === '678a2ca3ed3ccf67279b445b');
+  const isLiked = likes.some((likes:any) => likes.user_id._id === '678a2ca3ed3ccf67279b445b');
+
 
 
   return (
@@ -104,19 +106,22 @@ export default async function BlogPostInteractions({ post }: any) {
               <p className="text-gray-700">No comments yet</p>
             </div>
           )}
+          <div className="max-h-72 overflow-y-auto">
+
 
           {comments?.length > 0 &&
             comments?.map((comment: any) => (
-              <div key={comment._id} className="p-4 rounded-lg bg-gray-50">
+              <div key={comment._id} className="p-4 rounded-lg mb-2 bg-gray-50">
                 <div>
-                  <span className="font-semibold">{comment.user_id}</span>
+                  <span className="font-semibold text-black">{comment.user_id.name}</span>
                 </div>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="font-medium">{comment.comment_text}</span>
+                  <span className="font-medium text-gray-400">{comment.comment_text}</span>
                 </div>
               </div>
             ))}
         </div>
+          </div>
 
         {/* Comment Form - Client Component */}
         <CommentForm post={post} addComment={addComment} />

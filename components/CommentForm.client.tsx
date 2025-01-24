@@ -2,6 +2,7 @@
 // File: components/CommentForm.client.tsx
 'use client'
 
+import { Send } from 'lucide-react';
 import { useState } from 'react';
 
 export default function CommentForm({ 
@@ -37,14 +38,15 @@ export default function CommentForm({
   };
 
   return (
-    <form   className="space-y-4">
-      <div>
+    <form   className="space-y-4 flex justify-between items-center py-5">
+      <div className='w-full flex-1'>
         <textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           name='comment'
+          
           placeholder="Add a comment..."
-          className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full p-3 rounded-lg bg-transparent outline-none border-none "
           rows={3}
           required
         />
@@ -60,7 +62,7 @@ export default function CommentForm({
         disabled={isSubmitting}
         className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
       >
-        {isSubmitting ? 'Submitting...' : 'Submit Comment'}
+        <Send className="h-5 w-5" />  
       </button>
     </form>
   );
